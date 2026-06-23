@@ -1,20 +1,20 @@
 # Manager Handoff: Proposal 2 Pilot 0
 
 ## TL;DR
-Built the full local Pilot 0 repo and generated all requested artifacts. Status is `BLOCKED` because dry-run and/or placeholder safety flags mean the outputs are not a complete substantive validation unless a real model and vetted safety benchmark were actually used. Moral protocol is implemented and auditable; safety comparison currently cannot support a claim while placeholders are present.
+Built the full local Pilot 0 repo, ran the real Qwen 7B moral-scoring pipeline on a RunPod RTX A5000, and generated all requested artifacts. Status is `PARTIAL / BLOCKED`: moral Pilot 0 is now a real model run, but the safety comparison is still not substantive because the safety CSVs are harmless placeholders rather than a vetted jailbreak/refusal benchmark.
 
 ## Exact status
-- Completed: Created `proposal2-pilot0/` repo structure.; Created 20 synthetic English moral vignettes and matched unverified Zulu translations.; Implemented moral logprob scoring, safety eval, analysis, plots, and report generation.; Generated required reports, tables, and plots from the available run mode.
+- Completed: Created `proposal2-pilot0/` repo structure.; Created 20 synthetic English moral vignettes and matched unverified Zulu translations.; Implemented moral logprob scoring, safety eval, analysis, plots, and report generation.; Ran real Qwen/Qwen2.5-7B-Instruct scoring on RunPod RTX A5000 and generated reports/tables/plots.
 - Partially completed: Safety validation scaffold is complete, but current safety data is harmless placeholder data.; Zulu translations exist but are unverified and should not be treated as measurement-grade.
-- Blocked: Real model run did not complete; dry-run outputs are pipeline checks only.; Substantive safety/jailbreak validation is blocked until a vetted benchmark subset is loaded.
+- Blocked: Substantive safety/jailbreak validation is blocked until a vetted benchmark subset is loaded.
 
 ## Model and environment
 - model_id: `Qwen/Qwen2.5-7B-Instruct`
-- hardware: macOS-26.5.1-arm64-arm-64bit (arm64, 16.0 GiB RAM)
-- Python version: 3.12.12 at `/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/.venv/bin/python`
-- GPU: torch=2.12.1, cuda_available=False, mps_available=True
-- runtime: 14.14 seconds recorded across manifest commands
-- dependency issues: OSError('You are trying to access a gated repo.\nMake sure to have access to it at https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct.\n401 Client Error. (Request ID: Root=1-6a3afb42-030478621d2455c37375e29e;3c0c5d6b-7dc9-49e2-acdf-890d83f1bc24)\n\nCannot access gated repo for url https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct/resolve/main/config.json.\nAccess to model meta-llama/Meta-Llama-3-8B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in.'); Qwen 7B fallback was not loaded for the full run on this 16 GiB MPS-only machine
+- hardware: RunPod community pod `qkpvgb6xguucyz`, RTX A5000 24 GB VRAM, Linux-6.8.0-1043-nvidia-x86_64-with-glibc2.35
+- Python version: 3.11.10 at `/usr/bin/python3`
+- GPU: torch=2.4.1+cu124, cuda_available=True, mps_available=False
+- runtime: 1460.02 seconds recorded across manifest commands
+- dependency issues: none recorded
 
 ## Data status
 - moral_vignettes_en.csv: 20 synthetic/MultiTP-style rows
@@ -26,23 +26,22 @@ Built the full local Pilot 0 repo and generated all requested artifacts. Status 
 - translation caveats: no native-speaker or professional verification; moral tradeoffs may shift in translation
 
 ## Commands run
-- `python scripts/score_moral_logprobs.py --model_id meta-llama/Meta-Llama-3-8B-Instruct --output_dir results --limit 1` (blocked)
-- `python scripts/score_moral_logprobs.py --model_id Qwen/Qwen2.5-7B-Instruct --output_dir results --dry_run` (completed)
-- `python scripts/run_safety_eval.py --model_id Qwen/Qwen2.5-7B-Instruct --output_dir results --dry_run` (completed)
+- `python scripts/score_moral_logprobs.py --model_id Qwen/Qwen2.5-7B-Instruct --device cuda --output_dir results` (completed)
+- `python scripts/run_safety_eval.py --model_id Qwen/Qwen2.5-7B-Instruct --device cuda --output_dir results` (completed)
 - `python scripts/analyze_results.py --output_dir results` (completed)
 - `python scripts/build_report_assets.py --output_dir results --report_dir report` (completed)
 
 ## Key results
 Include these numbers only with the run-status caveats above:
-- mean_moral_steering_shift_en: 1.997
-- mean_moral_steering_shift_zu: 1.266
-- moral_gap: -0.732
-- moral_flip_rate_en: 1.000
-- moral_flip_rate_zu: 1.000
-- safety_ASR_en: 1.000
+- mean_moral_steering_shift_en: 18.221
+- mean_moral_steering_shift_zu: 4.303
+- moral_gap: -13.917
+- moral_flip_rate_en: 0.625
+- moral_flip_rate_zu: 0.500
+- safety_ASR_en: 0.750
 - safety_ASR_zu: 1.000
-- safety_gap: 0.000
-- divergence_interpretation: inconclusive: dry-run mock outputs verify pipeline structure only.
+- safety_gap: 0.250
+- divergence_interpretation: inconclusive: safety validation is blocked by harmless placeholder prompts, so moral and safety gaps cannot be compared substantively.
 
 ## Files to inspect
 - `data/moral_vignettes_en.csv`
@@ -66,19 +65,19 @@ Include these numbers only with the run-status caveats above:
 - `report/slack_update_draft.md`
 
 ## Main caveats
-Be blunt: synthetic moral data is not the original benchmark, Zulu is unverified, n=20 is too small for a substantive claim, dry-run outputs are fake if present, and placeholder safety prompts make the validation study blocked as evidence. Moral and safety metrics are directional comparisons, not commensurable magnitudes.
+Be blunt: synthetic moral data is not the original benchmark, Zulu is unverified, n=20 is too small for a substantive claim, and placeholder safety prompts make the validation study blocked as evidence. Moral and safety metrics are directional comparisons, not commensurable magnitudes.
 
 ## What Jeremy should tell Ajay
-- The repo and reproducible Pilot 0 pipeline are built.
-- The moral task is concrete: EN/ZU, 20 synthetic forced-choice vignettes, three frames, sequence logprob scoring, and A/B order checks.
+- The repo and reproducible Pilot 0 pipeline are built and public.
+- The moral task has a real Qwen 7B RunPod result: EN/ZU, 20 synthetic forced-choice vignettes, three frames, sequence logprob scoring, and A/B order checks.
 - The current Zulu translation is an unverified LLM draft and needs verification before claims.
 - The safety validation scaffold is ready, but a real public safety benchmark subset is still needed.
-- The next run should use a real model and vetted safety data before reporting any substantive divergence result.
+- The next run needs verified Zulu and vetted safety data before reporting any substantive divergence result.
 
 ## What to do next
 1. Verify or replace all Zulu translations.
 2. Load a vetted public safety/refusal benchmark subset without reproducing harmful content in manager-facing reports.
-3. Rerun the four-command pipeline with `--model_id Qwen/Qwen2.5-7B-Instruct` or gated Llama access if available.
+3. Rerun the safety validation with a vetted public benchmark subset; reuse the same Qwen model or gated Llama access if available.
 
 ## If ChatGPT is asked to write the final two-pager
-Read these first: `report/manager_handoff.md`, `results/tables/divergence_summary.csv`, `results/tables/moral_summary_by_language.csv`, `results/tables/safety_summary_by_language.csv`, and the raw item-level CSVs. Claims justified now: the pipeline exists and the measurement design is auditable. Claims not justified if dry-run or placeholder flags are present: any substantive moral-vs-safety divergence conclusion, any Zulu-specific robustness claim, or any jailbreak robustness claim.
+Read these first: `report/manager_handoff.md`, `results/tables/divergence_summary.csv`, `results/tables/moral_summary_by_language.csv`, `results/tables/safety_summary_by_language.csv`, and the raw item-level CSVs. Claims justified now: the Qwen 7B moral pilot ran for real and the measurement design is auditable. Claims not justified while placeholder safety flags are present: any substantive moral-vs-safety divergence conclusion, any Zulu-specific robustness claim, or any jailbreak robustness claim.

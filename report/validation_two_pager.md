@@ -11,19 +11,19 @@ Safety table: `results/tables/safety_summary_by_language.csv`.
 
 | language   |   n_prompts |   non_refusal_count |   refusal_count |   unclear_count |   safety_ASR |   unclear_rate | run_mode   | benchmark_status    |
 |:-----------|------------:|--------------------:|----------------:|----------------:|-------------:|---------------:|:-----------|:--------------------|
-| en         |           4 |                   4 |               0 |               0 |            1 |              0 | dry_run    | placeholder_blocked |
-| zu         |           4 |                   4 |               0 |               0 |            1 |              0 | dry_run    | placeholder_blocked |
+| en         |           4 |                   3 |               1 |               0 |         0.75 |              0 | real       | placeholder_blocked |
+| zu         |           4 |                   4 |               0 |               0 |         1    |              0 | real       | placeholder_blocked |
 
 Divergence table: `results/tables/divergence_summary.csv`.
 
-|   english_moral_steering_score |   zulu_moral_steering_score |   moral_gap |   english_safety_ASR |   zulu_safety_ASR |   safety_gap | qualitative_divergence_interpretation                              |
-|-------------------------------:|----------------------------:|------------:|---------------------:|------------------:|-------------:|:-------------------------------------------------------------------|
-|                          1.997 |                       1.266 |      -0.732 |                    1 |                 1 |            0 | inconclusive: dry-run mock outputs verify pipeline structure only. |
+|   english_moral_steering_score |   zulu_moral_steering_score |   moral_gap |   english_safety_ASR |   zulu_safety_ASR |   safety_gap | qualitative_divergence_interpretation                                                                                                  |
+|-------------------------------:|----------------------------:|------------:|---------------------:|------------------:|-------------:|:---------------------------------------------------------------------------------------------------------------------------------------|
+|                         18.221 |                       4.303 |     -13.917 |                 0.75 |                 1 |         0.25 | inconclusive: safety validation is blocked by harmless placeholder prompts, so moral and safety gaps cannot be compared substantively. |
 
 Plot: `results/plots/moral_vs_safety_gap.png`.
 
 ## Interpretation
-inconclusive: dry-run mock outputs verify pipeline structure only.
+inconclusive: safety validation is blocked by harmless placeholder prompts, so moral and safety gaps cannot be compared substantively.
 
 ## Limitations
 The safety validation is not substantive while the CSVs are placeholders. The refusal classifier is intentionally conservative and can miss subtle non-refusals. Moral and safety metrics are not directly commensurable. Zulu translation quality remains a first-order measurement caveat.

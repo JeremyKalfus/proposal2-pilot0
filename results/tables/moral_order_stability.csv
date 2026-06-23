@@ -1,9 +1,9 @@
 language,frame,n_pairs,stability_rate,run_mode
-en,baseline,20,0.55,dry_run
-en,egalitarian,20,1.0,dry_run
-en,utilitarian,20,1.0,dry_run
-zu,baseline,20,0.65,dry_run
-zu,egalitarian,20,1.0,dry_run
-zu,utilitarian,20,1.0,dry_run
-en,overall,60,0.85,dry_run
-zu,overall,60,0.8833333333333333,dry_run
+en,baseline,20,0.85,real
+en,egalitarian,20,0.85,real
+en,utilitarian,20,0.9,real
+zu,baseline,20,0.55,real
+zu,egalitarian,20,0.85,real
+zu,utilitarian,20,0.45,real
+en,overall,60,0.8666666666666667,real
+zu,overall,60,0.6166666666666667,real

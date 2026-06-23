@@ -175,9 +175,13 @@ def main() -> int:
         model_id = unique_join([c.get("model_id", "") for c in manifest.get("commands", []) if c.get("model_id")])
 
     commands = manifest.get("commands", [])
+    current_report_command = {
+        "command": "python " + " ".join(sys.argv),
+        "status": "completed",
+    }
     seen_commands = set()
     command_lines = []
-    for entry in commands:
+    for entry in [*commands, current_report_command]:
         key = (entry.get("command", "n/a"), entry.get("status", "unknown"))
         if key in seen_commands:
             continue

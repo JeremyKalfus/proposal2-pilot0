@@ -1,98 +1,50 @@
 {
   "commands": [
     {
-      "command": "python scripts/score_moral_logprobs.py --model_id meta-llama/Meta-Llama-3-8B-Instruct --output_dir results --limit 1",
+      "command": "python scripts/score_moral_logprobs.py --model_id Qwen/Qwen2.5-7B-Instruct --device cuda --output_dir results",
+      "device": "cuda",
       "dry_run": false,
-      "duration_seconds": 11.67,
-      "error": "OSError('You are trying to access a gated repo.\\nMake sure to have access to it at https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct.\\n401 Client Error. (Request ID: Root=1-6a3afb42-030478621d2455c37375e29e;3c0c5d6b-7dc9-49e2-acdf-890d83f1bc24)\\n\\nCannot access gated repo for url https://huggingface.co/meta-llama/Meta-Llama-3-8B-Instruct/resolve/main/config.json.\\nAccess to model meta-llama/Meta-Llama-3-8B-Instruct is restricted. You must have access to it and be authenticated to access it. Please log in.')",
-      "model_id": "meta-llama/Meta-Llama-3-8B-Instruct",
-      "script": "score_moral_logprobs.py",
-      "status": "blocked"
-    },
-    {
-      "command": "python scripts/score_moral_logprobs.py --model_id Qwen/Qwen2.5-7B-Instruct --output_dir results --dry_run",
-      "device": "auto",
-      "dry_run": true,
-      "duration_seconds": 0.01,
+      "duration_seconds": 1419.07,
       "model_id": "Qwen/Qwen2.5-7B-Instruct",
-      "output": "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/results/raw/moral_logprobs_item_level.csv",
+      "output": "/workspace/proposal2-pilot0/results/raw/moral_logprobs_item_level.csv",
       "rows": 240,
       "script": "score_moral_logprobs.py",
       "status": "completed"
     },
     {
-      "command": "python scripts/run_safety_eval.py --model_id Qwen/Qwen2.5-7B-Instruct --output_dir results --dry_run",
-      "device": "auto",
-      "dry_run": true,
-      "duration_seconds": 0.0,
+      "command": "python scripts/run_safety_eval.py --model_id Qwen/Qwen2.5-7B-Instruct --device cuda --output_dir results",
+      "device": "cuda",
+      "dry_run": false,
+      "duration_seconds": 40.31,
       "model_id": "Qwen/Qwen2.5-7B-Instruct",
-      "output": "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/results/raw/safety_outputs_item_level.csv",
+      "output": "/workspace/proposal2-pilot0/results/raw/safety_outputs_item_level.csv",
       "rows": 8,
       "script": "run_safety_eval.py",
       "status": "completed"
     },
     {
       "command": "python scripts/analyze_results.py --output_dir results",
-      "duration_seconds": 0.35,
+      "duration_seconds": 0.64,
       "outputs": [
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/results/tables/moral_summary_by_language.csv",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/results/tables/moral_summary_by_axis.csv",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/results/tables/moral_order_stability.csv",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/results/tables/safety_summary_by_language.csv",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/results/tables/divergence_summary.csv",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/results/plots/moral_vs_safety_gap.png"
+        "/workspace/proposal2-pilot0/results/tables/moral_summary_by_language.csv",
+        "/workspace/proposal2-pilot0/results/tables/moral_summary_by_axis.csv",
+        "/workspace/proposal2-pilot0/results/tables/moral_order_stability.csv",
+        "/workspace/proposal2-pilot0/results/tables/safety_summary_by_language.csv",
+        "/workspace/proposal2-pilot0/results/tables/divergence_summary.csv",
+        "/workspace/proposal2-pilot0/results/plots/moral_vs_safety_gap.png"
       ],
       "script": "analyze_results.py",
       "status": "completed"
     },
     {
       "command": "python scripts/build_report_assets.py --output_dir results --report_dir report",
-      "duration_seconds": 0.88,
+      "duration_seconds": 1.34,
       "outputs": [
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/pilot0_two_pager.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/validation_two_pager.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/proposal2_refinement_notes.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/slack_update_draft.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/manager_handoff.md"
-      ],
-      "script": "build_report_assets.py",
-      "status": "completed"
-    },
-    {
-      "command": "python scripts/build_report_assets.py --output_dir results --report_dir report",
-      "duration_seconds": 0.76,
-      "outputs": [
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/pilot0_two_pager.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/validation_two_pager.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/proposal2_refinement_notes.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/slack_update_draft.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/manager_handoff.md"
-      ],
-      "script": "build_report_assets.py",
-      "status": "completed"
-    },
-    {
-      "command": "python scripts/build_report_assets.py --output_dir results --report_dir report",
-      "duration_seconds": 0.47,
-      "outputs": [
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/pilot0_two_pager.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/validation_two_pager.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/proposal2_refinement_notes.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/slack_update_draft.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/manager_handoff.md"
-      ],
-      "script": "build_report_assets.py",
-      "status": "completed"
-    },
-    {
-      "command": "python scripts/build_report_assets.py --output_dir results --report_dir report",
-      "duration_seconds": 0.75,
-      "outputs": [
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/pilot0_two_pager.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/validation_two_pager.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/proposal2_refinement_notes.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/slack_update_draft.md",
-        "/Users/jeremykalfus/CodingProjects/Algoverse/proposal2-pilot0/report/manager_handoff.md"
+        "/workspace/proposal2-pilot0/report/pilot0_two_pager.md",
+        "/workspace/proposal2-pilot0/report/validation_two_pager.md",
+        "/workspace/proposal2-pilot0/report/proposal2_refinement_notes.md",
+        "/workspace/proposal2-pilot0/report/slack_update_draft.md",
+        "/workspace/proposal2-pilot0/report/manager_handoff.md"
       ],
       "script": "build_report_assets.py",
       "status": "completed"

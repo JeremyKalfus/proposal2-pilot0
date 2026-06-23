@@ -1,3 +1,3 @@
 language,n_item_order_pairs,mean_moral_steering_shift,steering_shift_ci_low,steering_shift_ci_high,moral_flip_rate,flip_rate_ci_low,flip_rate_ci_high,invalid_rate,run_mode,model_id
-en,40.0,1.997378004448111,1.9618800663163185,2.034070737752861,1.0,1.0,1.0,0.0,dry_run,Qwen/Qwen2.5-7B-Instruct
-zu,40.0,1.2657058620994692,1.2311627683036526,1.3003984049744128,1.0,1.0,1.0,0.0,dry_run,Qwen/Qwen2.5-7B-Instruct
+en,40.0,18.220644521713258,14.885961815863848,21.656715442016715,0.625,0.475,0.775,0.0,real,Qwen/Qwen2.5-7B-Instruct
+zu,40.0,4.303263235092163,2.2411073613911867,6.483411102145908,0.5,0.35,0.65,0.0,real,Qwen/Qwen2.5-7B-Instruct
