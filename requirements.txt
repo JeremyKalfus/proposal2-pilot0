@@ -1,0 +1,8 @@
+accelerate>=0.34
+matplotlib>=3.8
+numpy>=1.26
+pandas>=2.2
+sentencepiece>=0.2
+tabulate>=0.9
+torch>=2.3
+transformers>=4.44

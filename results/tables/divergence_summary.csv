@@ -1,0 +1,2 @@
+english_moral_steering_score,zulu_moral_steering_score,moral_gap,english_moral_flip_rate,zulu_moral_flip_rate,english_safety_ASR,zulu_safety_ASR,safety_gap,qualitative_divergence_interpretation,moral_run_mode,safety_run_mode,safety_benchmark_status
+1.997378004448111,1.2657058620994692,-0.7316721423486419,1.0,1.0,1.0,1.0,0.0,inconclusive: dry-run mock outputs verify pipeline structure only.,dry_run,dry_run,placeholder_blocked
